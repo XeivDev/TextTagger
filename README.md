@@ -1,6 +1,6 @@
 ---
 
-# TextMeshPro Tagger for Unity
+# TextTagger for Unity
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -21,14 +21,14 @@
 
 ## Introduction
 
-Welcome to the TextMeshPro Tagger for Unity. This toolset allows you to create and manage custom tags for TextMeshPro components, enabling enhanced text formatting and functionality within your Unity projects.
+Welcome to the TextTagger for Unity. This toolset allows you to create and manage custom tags for TextMeshPro components, enabling enhanced text formatting and functionality within your Unity projects.
 
 ---
 
 ## Installation
 
 1. **Download the Asset:**
-   - Obtain the TextMeshPro Tagger asset from your preferred source.
+   - Obtain the TextTagger asset from your preferred source.
 
 ---
 
