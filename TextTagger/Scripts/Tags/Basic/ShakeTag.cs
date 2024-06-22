@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using Xeiv.TextTaggerSystem;
 
@@ -14,6 +15,9 @@ public class ShakeTag : Tag
     public Vector2 defaultDisplacement = new Vector2(1, 1);
     public float defaultFrequency = 1.1f;
 
+    [Space(50)]
+    [CustomHelp("This tag modifies the position of each character encapsulated by the tag by randomly moving each character by a predefined offset.\r\n\nHow to use it:\r\n\t<tagName> to use the default values.\r\n\t<tagName=displacementX,displacementY,frequency> to use the specified values.", MessageType.Info, 0, 1, 1)]
+    public string comment = "Just an editor Variable";
 
     public override WaitForSeconds ApplyEffect(TextTagger controller, List<ParameterData> data)
     {

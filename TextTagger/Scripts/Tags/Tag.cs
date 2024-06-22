@@ -18,9 +18,9 @@ namespace Xeiv.TextTaggerSystem {
     public abstract class Tag : ScriptableObject
     {
 
-        [field: SerializeField] public string tagName { get; private set; } = "tagName";
-        [field: SerializeField] public int tagPriority { get; private set; } = 0;
-        [field: SerializeField] public bool isSingleTag { get; private set; } = false;
+        [field: SerializeField] public string TagName { get; private set; } = "tagName";
+        [field: SerializeField] public int TagPriority { get; private set; } = 0;
+        [field: SerializeField] public bool IsSingleTag { get; private set; } = false;
 
 
         public List<ParameterData> GetParameters(string tagData)

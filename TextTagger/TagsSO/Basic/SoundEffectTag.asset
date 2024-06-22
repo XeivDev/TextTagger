@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9751748f7594803409d8c7cce6007b57, type: 3}
-  m_Name: SpeedTag
+  m_Script: {fileID: 11500000, guid: 8e265417411456d4dbe40a94a069af78, type: 3}
+  m_Name: SoundEffectTag
   m_EditorClassIdentifier: 
-  <tagName>k__BackingField: speed
+  <tagName>k__BackingField: sfx
   <tagPriority>k__BackingField: 0
   <isSingleTag>k__BackingField: 1
-  defaultSpeed: 10
+  selectRandomSound: 1
+  defaultSoundIndex: 0
+  sounds:
+  - {fileID: 8300000, guid: 4a2d72edf8dd32c498604158f9784a19, type: 3}
   comment: Just an editor Variable

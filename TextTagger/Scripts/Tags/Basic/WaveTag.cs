@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 namespace Xeiv.TextTaggerSystem
@@ -13,6 +14,9 @@ namespace Xeiv.TextTaggerSystem
         public Vector2 defaultAmplitude = new Vector2(1,1);
         public float defaultFrequency = 1.1f;
 
+        [Space(50)]
+        [CustomHelp("This tag modifies the position of each character encapsulated by the tag by applying a wave effect.\r\nTo use it:\r\n\t<tagName> to use the default values.\r\n\t<tagName=amplitudeX,amplitudeY,frequency> to use the specified values.", MessageType.Info, 0, 1, 1)]
+        public string comment = "Just an editor Variable";
 
         public override WaitForSeconds ApplyEffect(TextTagger controller, List<ParameterData> data)
         {

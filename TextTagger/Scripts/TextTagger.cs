@@ -9,6 +9,8 @@ namespace Xeiv.TextTaggerSystem
     {
         public float textSpeed = 10;
         public TMP_Text tmpText;
+        public AudioSource lettersAudioSource;
+        public AudioSource effectsAudioSource;
         [SerializeField] private List<Tag> availableTags = new List<Tag>();
         private Dictionary<string, Tag> tags = new Dictionary<string, Tag>();
 
@@ -19,6 +21,8 @@ namespace Xeiv.TextTaggerSystem
         private Mesh textMesh;
         private Vector3[] textVertices;
         public Vector3[] originalVertices { get; private set; }
+        public AudioClip[] lettersAudioClips { get; set; }
+        public bool randomLetterAudioClip { get; set; }
 
         struct TagRequieredData
         {
@@ -40,7 +44,7 @@ namespace Xeiv.TextTaggerSystem
         {
             for (int i = 0; i < availableTags.Count; i++)
             {
-                tags.Add(availableTags[i].tagName, availableTags[i]);
+                tags.Add(availableTags[i].TagName, availableTags[i]);
             }
 
             Parse();
@@ -73,7 +77,7 @@ namespace Xeiv.TextTaggerSystem
                 Vector2Int boundaries = new Vector2Int(pair.index, pair.index);
                 Tag tag = tags[pair.name];
                 
-                if (!tag.isSingleTag)
+                if (!tag.IsSingleTag)
                     continue;
                 List<ParameterData> requieredParameters = tag.GetParameters(pair.fullTag);
                 TagRequieredData requieredData = new TagRequieredData(tag, boundaries, requieredParameters);
@@ -82,7 +86,7 @@ namespace Xeiv.TextTaggerSystem
 
 
 
-            tagsData.Sort((a, b) => b.tag.tagPriority.CompareTo(a.tag.tagPriority));
+            tagsData.Sort((a, b) => b.tag.TagPriority.CompareTo(a.tag.TagPriority));
             originalVertices = tmpText.mesh.vertices;
         }
 
@@ -96,7 +100,7 @@ namespace Xeiv.TextTaggerSystem
             for (int i = 0; i < tagsData.Count; i++)
             {
                 Tag tagToUpdate = tagsData[i].tag;
-                if (tagToUpdate.isSingleTag)
+                if (tagToUpdate.IsSingleTag)
                     continue;
                 if (tagsData[i].bounds.x <= currentCharacter)
                 {
@@ -133,6 +137,14 @@ namespace Xeiv.TextTaggerSystem
                     }
                 }
                 currentCharacter += 1;
+
+                if (textInfo.characterInfo[currentCharacter].character!=' ')
+                {
+                    if (randomLetterAudioClip)
+                        lettersAudioSource.clip = SelectLetterAudioClip();
+                    lettersAudioSource.Play();
+
+                }
                 yield return new WaitForSeconds(1/textSpeed); 
             }
             yield return null; 
@@ -145,7 +157,12 @@ namespace Xeiv.TextTaggerSystem
             tmpText.maxVisibleCharacters = textInfo.characterCount;
         }
 
-
+        private AudioClip SelectLetterAudioClip()
+        {
+            if (lettersAudioClips.Length == 0)
+                return null;
+            return lettersAudioClips[Random.Range(0, lettersAudioClips.Length)];
+        }
 
     }
 }

@@ -26,7 +26,7 @@ namespace Xeiv.TextTaggerSystem
         {
             foreach (var item in tags)
             {
-                if(item.tagName == tagName)
+                if(item.TagName == tagName)
                     return true;
             }
             return false;
