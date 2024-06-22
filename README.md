@@ -102,7 +102,7 @@ public class CustomTag : Tag
 
 1. **Multiple Tags in Text:**
    - Use multiple tags within the same `TMP_Text` component by specifying them in the text string.
-   - Right now nested tags are not supported.
+   - Combine multiple tags nesting them.
 
 ```csharp
 string text = "<custom>Custom Tag Text</custom> <another>Another Tag</another>";
