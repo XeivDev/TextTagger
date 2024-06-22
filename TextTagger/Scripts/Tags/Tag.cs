@@ -25,12 +25,12 @@ namespace Xeiv.TextTaggerSystem {
 
         public List<ParameterData> GetParameters(string tagData)
         {
-            Regex valueRegex = new Regex(@"^([^|]+)\|(.+)$");
+            Regex valueRegex = new Regex(@"<\w+=(.+?)>");
             Match match = valueRegex.Match(tagData);
 
             if (match.Success)
             {
-                return ParseParameters(match.Groups[2].Value);
+                return ParseParameters(match.Groups[1].Value);
             }
             else
             {

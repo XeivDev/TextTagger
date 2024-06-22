@@ -42,8 +42,6 @@ namespace Xeiv.TextTaggerSystem
                     textVertices[index + corner] += offset;
                 }
             }
-
-            Debug.Log("Waving");
         }
 
         private Vector3 Wave(Vector2 amplitude, float frequency, float offset)

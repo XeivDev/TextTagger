@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Xml;
 using TMPro;
 using UnityEngine;
 
@@ -52,29 +50,38 @@ namespace Xeiv.TextTaggerSystem
         [ContextMenu("Parse")]
         private void Parse()
         {
-            string result = TagParser.ParseTags(tmpText.text, availableTags);
-            tmpText.text = result;
+            var textProcessingResults = TagParser.ProcessText(tmpText.text, availableTags);
+            var pairsData = TagParser.PairTags(textProcessingResults.openingTags, textProcessingResults.closingTags);
+
+            tmpText.text = textProcessingResults.processedText;
             tmpText.ForceMeshUpdate();
 
             tagsData.Clear();
 
-            TMP_TextInfo textInfo = tmpText.textInfo;
-            var linksData = textInfo.linkInfo;
 
-
-            for (int i = 0; i < textInfo.linkCount; i++)
+            foreach (var pair in pairsData.pairedTags)
             {
-                var start = linksData[i].linkTextfirstCharacterIndex;
-                var end = start + linksData[i].linkTextLength;
-
-                currentAreaOfAction = new Vector2Int(start, end);
-                string type = linksData[i].GetLinkID().Split("|")[0];
-                Tag selectedTag = tags[type];
-                List<ParameterData> requieredParameters = selectedTag.GetParameters(linksData[i].GetLinkID());
-
-                tagsData.Add(new TagRequieredData(selectedTag, currentAreaOfAction, requieredParameters));
-                
+                Vector2Int boundaries = new Vector2Int(pair.openingTag.index, pair.closingTag.index);
+                Tag tag = tags[pair.openingTag.name];
+                List<ParameterData> requieredParameters = tag.GetParameters(pair.openingTag.fullTag);
+                TagRequieredData requieredData = new TagRequieredData(tag, boundaries, requieredParameters);
+                tagsData.Add(requieredData);
             }
+
+            foreach (var pair in pairsData.unpairedTags)
+            {
+                Vector2Int boundaries = new Vector2Int(pair.index, pair.index);
+                Tag tag = tags[pair.name];
+                
+                if (!tag.isSingleTag)
+                    continue;
+                List<ParameterData> requieredParameters = tag.GetParameters(pair.fullTag);
+                TagRequieredData requieredData = new TagRequieredData(tag, boundaries, requieredParameters);
+                tagsData.Add(requieredData);
+            }
+
+
+
             tagsData.Sort((a, b) => b.tag.tagPriority.CompareTo(a.tag.tagPriority));
             originalVertices = tmpText.mesh.vertices;
         }
