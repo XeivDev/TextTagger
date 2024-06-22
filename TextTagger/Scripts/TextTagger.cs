@@ -42,6 +42,7 @@ namespace Xeiv.TextTaggerSystem
 
         private void Awake()
         {
+            tags = new Dictionary<string, Tag>();
             for (int i = 0; i < availableTags.Count; i++)
             {
                 tags.Add(availableTags[i].TagName, availableTags[i]);
@@ -137,13 +138,15 @@ namespace Xeiv.TextTaggerSystem
                     }
                 }
                 currentCharacter += 1;
-
-                if (textInfo.characterInfo[currentCharacter].character!=' ')
+                if (textInfo.characterInfo.Length > currentCharacter)
                 {
-                    if (randomLetterAudioClip)
-                        lettersAudioSource.clip = SelectLetterAudioClip();
-                    lettersAudioSource.Play();
+                    if (textInfo.characterInfo[currentCharacter].character != ' ')
+                    {
+                        if (randomLetterAudioClip)
+                            lettersAudioSource.clip = SelectLetterAudioClip();
+                        lettersAudioSource.Play();
 
+                    }
                 }
                 yield return new WaitForSeconds(1/textSpeed); 
             }
