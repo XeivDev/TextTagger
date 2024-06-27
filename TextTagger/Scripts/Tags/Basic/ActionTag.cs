@@ -16,6 +16,10 @@ public class ActionTag : Tag
     [CustomHelp("This tag calls an OnActionTagCall event with the ActionName as argument.\r\n\nHow to use it:\r\n \t<tagName> to use the default values.\r\n\t<tagName=actionName> to use the specified value.", MessageType.Info, 0, 1, 1)]
     public string comment = "Just an editor Variable";
 
+    private ActionTag()
+    {
+        AutoClosing = true;
+    }
 
     public override WaitForSeconds ApplyEffect(TextTagger controller, List<ParameterData> data)
     {

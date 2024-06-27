@@ -17,6 +17,10 @@ namespace Xeiv.TextTaggerSystem
         [CustomHelp("This tag plays a sound when it appears on the screen.\r\n\nHow to use it:\r\n\t<tagName> to use the default values.\r\n\t<tagName=-1> play random sound.\r\n\t<tagName=value> play sound by index.", MessageType.Info, 0, 1, 1)]
         public string comment = "Just an editor Variable";
 
+        private EffectSoundTag()
+        {
+            AutoClosing = true;
+        }
 
         public override WaitForSeconds ApplyEffect(TextTagger controller, List<ParameterData> data)
         {

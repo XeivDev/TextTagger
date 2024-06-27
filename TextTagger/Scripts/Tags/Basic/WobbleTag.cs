@@ -26,8 +26,13 @@ namespace Xeiv.TextTaggerSystem
         public Mode defaultMode;
 
         [Space(50)]
-        [CustomHelp("This tag modifies the position of each character encapsulated by the tag by moving each character or vertex by a predefined offset.\r\n\nHow to use it:\r\n\t<tagName> to use the default values.\r\n\t<tagName=strengthX,strengthY,speed,mode> to use the specified values.", MessageType.Info, 0, 1, 1)]
+        [CustomHelp("This tag modifies the position of each character encapsulated by the tag by moving each character or vertex by a predefined offset.\r\n\nHow to use it:\r\n\t<tagName> to use the default values.\r\n\t<tagName=strengthX,strengthY,speed,mode> to use the specified values.\r\n\nModes:\r\n\t0 --> By Vertex\r\n\t1 --> By Character", MessageType.Info, 0, 1, 1)]
         public string comment = "Just an editor Variable";
+
+        private WobbleTag()
+        {
+            AutoClosing = false;
+        }
 
         public override WaitForSeconds ApplyEffect(TextTagger controller, List<ParameterData> data)
         {

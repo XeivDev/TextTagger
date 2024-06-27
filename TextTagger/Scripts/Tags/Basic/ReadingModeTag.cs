@@ -17,6 +17,10 @@ public class ReadingModeTag : Tag
     [CustomHelp("This tag changes the read mode of the TextTagger.\r\n\nHow to use it:\r\n \t<tagName> to use the default values.\r\n\t<tagName=modeIndex> to use the specified value.\r\n\nModes:\r\n\t0 --> By Words\r\n\t1 --> By Characters", MessageType.Info, 0, 1, 1)]
     public string comment = "Just an editor Variable";
 
+    private ReadingModeTag()
+    {
+        AutoClosing = true;
+    }
 
     public override WaitForSeconds ApplyEffect(TextTagger controller, List<ParameterData> data)
     {

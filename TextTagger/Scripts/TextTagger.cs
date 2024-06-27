@@ -33,7 +33,6 @@ namespace Xeiv.TextTaggerSystem
         public Action OnWordAppear;
         public Action<string> OnActionTagCall;
 
-
         /// <summary>
         /// Accesible variables
         /// </summary>
@@ -91,7 +90,6 @@ namespace Xeiv.TextTaggerSystem
                     Debug.LogWarning($"Some tags are already added\nTag: <{availableTags[i].TagName}>", this);
                 }
             }
-
             foreach (var collection in availableCollections)
             {
                 for (int i = 0; i < collection.TagsFromCollection.Count; i++)
@@ -133,7 +131,7 @@ namespace Xeiv.TextTaggerSystem
                 Vector2Int boundaries = new Vector2Int(pair.index, pair.index);
                 Tag tag = tags[pair.name];
                 
-                if (!tag.IsSingleTag)
+                if (!tag.AutoClosing)
                     continue;
                 List<ParameterData> requieredParameters = tag.GetParameters(pair.fullTag);
                 TagRequieredData requieredData = new TagRequieredData(tag, boundaries, requieredParameters);
@@ -158,7 +156,7 @@ namespace Xeiv.TextTaggerSystem
             for (int i = 0; i < tagsData.Count; i++)
             {
                 Tag tagToUpdate = tagsData[i].tag;
-                if (tagToUpdate.IsSingleTag)
+                if (tagToUpdate.AutoClosing)
                     continue;
                 if (tagsData[i].bounds.x <= CurrentCharacterIndex)
                 {

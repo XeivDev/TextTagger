@@ -22,12 +22,12 @@ namespace Xeiv.TextTaggerSystem {
 
         [SerializeField] private int tagPriority = 0;
 
-        [SerializeField] private bool isSingleTag = false;
+        [SerializeField] private bool autoClosing = false;
 
 
-        public string TagName { get => tagName; }
-        public int TagPriority { get => tagPriority; }
-        public bool IsSingleTag { get => isSingleTag; }
+        public string TagName { get => tagName; protected set => tagName = value; }
+        public int TagPriority { get => tagPriority; protected set => tagPriority = value; }
+        public bool AutoClosing { get => autoClosing; protected set => autoClosing = value; }
 
         public List<ParameterData> GetParameters(string tagData)
         {

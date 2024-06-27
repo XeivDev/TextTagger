@@ -21,6 +21,11 @@ namespace Xeiv.TextTaggerSystem
         [CustomHelp("This tag modifies the position of each character encapsulated by the tag by randomly moving each character by a predefined offset.\r\n\nHow to use it:\r\n\t<tagName> to use the default values.\r\n\t<tagName=displacementX,displacementY,frequency> to use the specified values.", MessageType.Info, 0, 1, 1)]
         public string comment = "Just an editor Variable";
 
+        private ShakeTag()
+        {
+            AutoClosing = false;
+        }
+
         public override WaitForSeconds ApplyEffect(TextTagger controller, List<ParameterData> data)
         {
             return new WaitForSeconds(0);

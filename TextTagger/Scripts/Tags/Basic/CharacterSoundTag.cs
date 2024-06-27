@@ -10,15 +10,18 @@ namespace Xeiv.TextTaggerSystem
     public class CharacterSoundTag : Tag
     {
         [Header("Configuration")]
-        public bool selectRandomSound=true;
+        public bool selectRandomSound = true;
         public int defaultSoundIndex = 0;
         public AudioClip[] sounds;
 
         [Space(50)]
         [CustomHelp("This tag modifies the sound of the character when it appears on the screen.\r\n\nHow to use it:\r\n\t<tagName> to use the default values.\r\n\t<tagName=-1> remove sound.\r\n\t<tagName=-2> play random sound.\r\n\t<tagName=value> play sound by index.", MessageType.Info, 0, 1, 1)]
-        public string comment="Just an editor Variable";
+        public string comment = "Just an editor Variable";
 
-
+        private CharacterSoundTag()
+        {
+            AutoClosing = true;
+        }
 
         public override WaitForSeconds ApplyEffect(TextTagger controller, List<ParameterData> data)
         {
