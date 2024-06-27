@@ -76,6 +76,12 @@ using Xeiv.TextTaggerSystem;
 [CreateAssetMenu(fileName = "NewCustomTag", menuName = "Systems/TextTagger/CustomTag")]
 public class CustomTag : Tag
 {
+
+    private CustomTag()
+    {
+        AutoClosing = true; /// True or False --> default value
+    }
+
     public override WaitForSeconds ApplyEffect(TextTagger controller, List<ParameterData> data)
     {
         throw new System.NotImplementedException();
