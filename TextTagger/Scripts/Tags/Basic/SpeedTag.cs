@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Xeiv.TextTaggerSystem
 {
 
-    [CreateAssetMenu(menuName = "Systems/TextTagger/SpeedTag")]
+    [CreateAssetMenu(menuName = "Systems/TextTagger/Tags/SpeedTag")]
     
     
     public class SpeedTag : Tag
@@ -15,7 +15,7 @@ namespace Xeiv.TextTaggerSystem
         public float defaultSpeed = 1;
 
         [Space(50)]
-        [CustomHelp("This tag modifies the number of characters per second to be displayed on the screen.\r\n\nHow to use it:\r\n \t<speed> to use the default values.\r\n\t<speed=number> to use the specified value.", MessageType.Info, 0, 1, 1)]
+        [CustomHelp("This tag modifies the number of characters per second to be displayed on the screen.\r\n\nHow to use it:\r\n \t<tagName> to use the default values.\r\n\t<tagName=number> to use the specified value.", MessageType.Info, 0, 1, 1)]
         public string comment = "Just an editor Variable";
 
 

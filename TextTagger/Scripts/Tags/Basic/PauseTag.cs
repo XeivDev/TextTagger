@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Xeiv.TextTaggerSystem
 {
-    [CreateAssetMenu(menuName = "Systems/TextTagger/PauseTag")]
+    [CreateAssetMenu(menuName = "Systems/TextTagger/Tags/PauseTag")]
     public class PauseTag : Tag
     {
         [Header("Configuration")]

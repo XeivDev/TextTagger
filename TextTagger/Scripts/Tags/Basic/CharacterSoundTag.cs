@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Xeiv.TextTaggerSystem
 {
-    [CreateAssetMenu(menuName = "Systems/TextTagger/CharacterSoundTag")]
+    [CreateAssetMenu(menuName = "Systems/TextTagger/Tags/CharacterSoundTag")]
     public class CharacterSoundTag : Tag
     {
         [Header("Configuration")]
@@ -22,23 +22,30 @@ namespace Xeiv.TextTaggerSystem
 
         public override WaitForSeconds ApplyEffect(TextTagger controller, List<ParameterData> data)
         {
-            if (data[1].intParameter == 1)
+            if (controller.lettersAudioSource != null)
             {
-                controller.randomLetterAudioClip = true;
-                controller.lettersAudioClips = sounds;
+                if (data[1].intParameter == 1)
+                {
+                    controller.IsRandomLetterAudioClip = true;
+                    controller.LettersAudioClips = sounds;
+                }
+                else
+                {
+                    controller.IsRandomLetterAudioClip = false;
+                    if (data[0].intParameter != -1)
+                    {
+                        if (sounds.Length == 0)
+                            controller.lettersAudioSource.clip = null;
+                        else
+                            controller.lettersAudioSource.clip = sounds[data[0].intParameter];
+                    }
+                    else
+                        controller.lettersAudioSource.clip = null;
+                }
             }
             else
             {
-                controller.randomLetterAudioClip = false;
-                if (data[0].intParameter != -1)
-                {
-                    if (sounds.Length == 0)
-                        controller.lettersAudioSource.clip = null;
-                    else
-                        controller.lettersAudioSource.clip = sounds[data[0].intParameter];
-                }
-                else
-                    controller.lettersAudioSource.clip = null;
+                //Debug.LogWarning("No LettersAudioSource Reference, sound will not be changed", this);
             }
             return new WaitForSeconds(0);
         }

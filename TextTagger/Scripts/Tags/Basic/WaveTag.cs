@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Xeiv.TextTaggerSystem
 {
-    [CreateAssetMenu(menuName = "Systems/TextTagger/WaveTag")]
+    [CreateAssetMenu(menuName = "Systems/TextTagger/Tags/WaveTag")]
     public class WaveTag : Tag
     {
         [Header("Configuration")]
@@ -28,7 +28,7 @@ namespace Xeiv.TextTaggerSystem
             Vector2 amplitude = data[0].vector2Parameter;
             float frequency = data[1].floatParameter;
 
-            Vector2Int areaOfAction = controller.currentAreaOfAction;
+            Vector2Int areaOfAction = controller.CurrentAreaOfAction;
             
             for (int i = areaOfAction.x; i < areaOfAction.y; i ++)
             {

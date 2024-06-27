@@ -8,14 +8,14 @@ using Xeiv.TextTaggerSystem;
 
 namespace Xeiv.TextTaggerSystem
 {
-    [CreateAssetMenu(menuName = "Systems/TextTagger/ShakeTag")]
+    [CreateAssetMenu(menuName = "Systems/TextTagger/Tags/ShakeTag")]
     public class ShakeTag : Tag
     {
 
 
         [Header("Configuration")]
         public Vector2 defaultDisplacement = new Vector2(1, 1);
-        public float defaultFrequency = 1.1f;
+        public float defaultFrequency = 0.1f;
 
         [Space(50)]
         [CustomHelp("This tag modifies the position of each character encapsulated by the tag by randomly moving each character by a predefined offset.\r\n\nHow to use it:\r\n\t<tagName> to use the default values.\r\n\t<tagName=displacementX,displacementY,frequency> to use the specified values.", MessageType.Info, 0, 1, 1)]
@@ -31,7 +31,7 @@ namespace Xeiv.TextTaggerSystem
             Vector2 displacement = data[0].vector2Parameter;
             float frequency = data[1].floatParameter;
 
-            Vector2Int areaOfAction = controller.currentAreaOfAction;
+            Vector2Int areaOfAction = controller.CurrentAreaOfAction;
 
 
             ParameterData timerData = data[2];
@@ -82,7 +82,7 @@ namespace Xeiv.TextTaggerSystem
                 var offset = Shake(displacement, frequency);
                 for (byte corner = 0, x2 = 0; corner < 4; corner++, x2++)
                 {
-                    textVertices[index + corner] = controller.originalVertices[index + corner] + offset;
+                    textVertices[index + corner] += offset;
                     arrayVertices.arrayParameter[x + x2] = textVertices[index + corner];
                 }
             }

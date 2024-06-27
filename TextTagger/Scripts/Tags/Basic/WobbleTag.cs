@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Xeiv.TextTaggerSystem
 {
-    [CreateAssetMenu(menuName = "Systems/TextTagger/WobbleTag")]
+    [CreateAssetMenu(menuName = "Systems/TextTagger/Tags/WobbleTag")]
     public class WobbleTag : Tag
     {
         [System.Serializable]
@@ -22,7 +22,7 @@ namespace Xeiv.TextTaggerSystem
 
         [Header("Configuration")]
         public Vector2 defaultStrength = new Vector2(1, 1);
-        public float defaultSpeed = 1.1f;
+        public float defaultSpeed = 3.1f;
         public Mode defaultMode;
 
         [Space(50)]
@@ -40,7 +40,7 @@ namespace Xeiv.TextTaggerSystem
             float speed = data[1].floatParameter;
             Mode mode = (Mode)data[2].intParameter;
 
-            Vector2Int areaOfAction = controller.currentAreaOfAction;
+            Vector2Int areaOfAction = controller.CurrentAreaOfAction;
 
             for (int i = areaOfAction.x; i < areaOfAction.y; i++)
             {

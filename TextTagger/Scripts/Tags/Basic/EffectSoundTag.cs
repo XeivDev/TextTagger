@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Xeiv.TextTaggerSystem
 {
-    [CreateAssetMenu(menuName = "Systems/TextTagger/EffectSoundTag")]
+    [CreateAssetMenu(menuName = "Systems/TextTagger/Tags/EffectSoundTag")]
     public class EffectSoundTag : Tag
     {
         [Header("Configuration")]
@@ -20,27 +20,34 @@ namespace Xeiv.TextTaggerSystem
 
         public override WaitForSeconds ApplyEffect(TextTagger controller, List<ParameterData> data)
         {
-            if (data[1].intParameter == 1)
+            if (controller.effectsAudioSource != null)
             {
-                if (sounds.Length == 0)
-                    controller.effectsAudioSource.clip = null;
+                if (data[1].intParameter == 1)
+                {
+                    if (sounds.Length == 0)
+                        controller.effectsAudioSource.clip = null;
+                    else
+                    {
+                        controller.effectsAudioSource.clip = sounds[Random.Range(0, sounds.Length)];
+                        controller.effectsAudioSource.Play();
+                    }
+
+                }
                 else
                 {
-                    controller.effectsAudioSource.clip = sounds[Random.Range(0, sounds.Length)];
-                    controller.effectsAudioSource.Play();
+                    if (sounds.Length == 0)
+                        controller.effectsAudioSource.clip = null;
+                    else
+                    {
+                        controller.effectsAudioSource.clip = sounds[data[0].intParameter];
+                        controller.effectsAudioSource.Play();
+                    }
+
                 }
-                
             }
             else
             {
-                if (sounds.Length == 0)
-                    controller.effectsAudioSource.clip = null;
-                else
-                {
-                    controller.effectsAudioSource.clip = sounds[data[0].intParameter];
-                    controller.effectsAudioSource.Play();
-                }
-                
+                //Debug.LogWarning("No EffectsAudioSource Reference, sound will not be played", this);
             }
 
                 
