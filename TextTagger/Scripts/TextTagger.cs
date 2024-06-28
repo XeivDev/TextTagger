@@ -16,6 +16,7 @@ namespace Xeiv.TextTaggerSystem
         [Header("Configuration")]
         public float textSpeed = 10;
         public ShowMode mode;
+        public bool keepTagChangesBetweenReads;
 
         [Header("Tags")]
         [SerializeField] private List<Tag> availableTags = new List<Tag>();
@@ -52,9 +53,16 @@ namespace Xeiv.TextTaggerSystem
         private Dictionary<string, Tag> tags = new Dictionary<string, Tag>();
         private Mesh textMesh;
         private Vector3[] textVertices;
-        
 
-        
+
+        /// <summary>
+        /// ResetVariables
+        /// </summary>
+        private bool RESET_IsRandomLetterAudioClip;
+        private ShowMode RESET_Mode;
+        private float RESET_TextSpeed;
+
+
 
         struct TagRequieredData
         {
@@ -102,6 +110,11 @@ namespace Xeiv.TextTaggerSystem
                     }
                 }
             }
+
+            RESET_IsRandomLetterAudioClip = IsRandomLetterAudioClip;
+            RESET_Mode = mode;
+            RESET_TextSpeed = textSpeed;
+
 
             SetText(tmpText.text);
             StartReading();
@@ -296,20 +309,34 @@ namespace Xeiv.TextTaggerSystem
             if (IsReading)
             {
                 StopAllCoroutines();
+
                 TMP_TextInfo textInfo = tmpText.textInfo;
                 CurrentCharacterIndex = textInfo.characterCount;
                 tmpText.maxVisibleCharacters = textInfo.characterCount;
 
-                lettersAudioSource.clip = null;
-                effectsAudioSource.clip = null;
-                LettersAudioClips = new AudioClip[0];
+                if (!keepTagChangesBetweenReads)
+                {
+                    lettersAudioSource.clip = null;
+                    effectsAudioSource.clip = null;
+                    LettersAudioClips = new AudioClip[0];
+                    IsRandomLetterAudioClip = false;
 
-                IsRandomLetterAudioClip = false;
+                    IsRandomLetterAudioClip = RESET_IsRandomLetterAudioClip;
+                    mode = RESET_Mode;
+                    textSpeed = RESET_TextSpeed;
+                }
+                else
+                {
+                    RESET_IsRandomLetterAudioClip = IsRandomLetterAudioClip;
+                    RESET_Mode = mode;
+                    RESET_TextSpeed = textSpeed;
+                }
+
                 IsReading = false;
-
                 OnEndReading?.Invoke();
-            }   
+            }
         }
+
 
         private AudioClip SelectLetterAudioClip()
         {

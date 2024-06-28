@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Foldout text="&lt;size=15&gt;&lt;b&gt;Configuration&lt;/b&gt;&lt;/size&gt;" value="true" name="ConfigurationFolder">
+        <ui:EnumField label="Read Mode" type="Xeiv.TextTaggerSystem.TextTagger+ShowMode, Assembly-CSharp" binding-path="mode" style="width: auto; flex-direction: row; justify-content: flex-start; align-self: auto; height: 18px;" />
+        <ui:FloatField label="Text Speed" value="42,2" binding-path="textSpeed" style="width: auto; height: 18px;" />
+        <ui:Toggle label="Keep Changes" binding-path="keepTagChangesBetweenReads" value="false" style="flex-direction: row; flex-wrap: nowrap;" />
+    </ui:Foldout>
+    <ui:Foldout text="&lt;size=15&gt;&lt;b&gt;Tags&lt;/b&gt;&lt;/size&gt;" name="TagsFolder">
+        <ui:ListView focusable="true" reorderable="false" show-foldout-header="true" show-add-remove-footer="true" show-border="true" horizontal-scrolling="false" show-alternating-row-backgrounds="None" selection-type="Single" header-title="Individual" show-bound-collection-size="true" binding-path="availableTags" />
+        <ui:ListView focusable="true" reorderable="true" show-foldout-header="true" show-add-remove-footer="true" show-border="true" horizontal-scrolling="false" show-alternating-row-backgrounds="None" selection-type="Single" header-title="Collection" show-bound-collection-size="true" binding-path="availableCollections" />
+    </ui:Foldout>
+    <ui:Foldout text="&lt;size=15&gt;&lt;b&gt;References&lt;/b&gt;&lt;/size&gt;" name="ReferencesFolder">
+        <uie:ObjectField label="TMP_Text" binding-path="tmpText" type="TMPro.TMP_Text, Unity.TextMeshPro" name="TMP_Text" />
+        <uie:ObjectField label="Letters AudioSource" binding-path="lettersAudioSource" type="UnityEngine.AudioSource, UnityEngine.AudioModule" name="Letters_AudioSource" />
+        <uie:ObjectField label="Effects AudioSource" binding-path="effectsAudioSource" allow-scene-objects="true" type="UnityEngine.AudioSource, UnityEngine.AudioModule" name="SFX_AudioSource" />
+    </ui:Foldout>
+    <ui:Label tabindex="-1" text="&lt;size=9&gt;Made by Xeiv" display-tooltip-when-elided="true" style="margin-top: 28px; align-self: flex-end;" />
+</ui:UXML>
